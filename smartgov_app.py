@@ -10,7 +10,7 @@ from sklearn.linear_model import LogisticRegression, Ridge
 # KONFIGURATION
 # ══════════════════════════════════════════════════════════════
 
-st.set_page_config(page_title="SmartGov AI", page_icon=None, layout="wide")
+st.set_page_config(page_title="Smarte Verwaltung", page_icon=None, layout="wide")
 
 st.markdown("""
 <style>
@@ -62,6 +62,10 @@ st.markdown("""
     "Umweltamt",
     "Bauamt",
     "Bildung und Betreuung",
+    "Ordnungsamt",
+    "Digitalisierung",
+    "Gebäudewirtschaft",
+    "Sozialamt",
 ]
 
 AMT_EMAIL = {
@@ -71,6 +75,10 @@ AMT_EMAIL = {
     "Umweltamt":            "umwelt@stadt.de",
     "Bauamt":               "bauamt@stadt.de",
     "Bildung und Betreuung":"bildung@stadt.de",
+    "Ordnungsamt":          "ordnung@stadt.de",
+    "Digitalisierung":      "digital@stadt.de",
+    "Gebäudewirtschaft":    "gebaeude@stadt.de",
+    "Sozialamt":            "sozial@stadt.de",
 }
 
 DAYS   = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"]
@@ -108,6 +116,14 @@ DEFAULT_TEXTS = [
     "Nutzungsänderung", "Bebauungsplan",
     "Kita Platz gesucht", "Schulanmeldung", "Hortplatz beantragen",
     "Schülerbeförderung", "Schulbezirk",
+    "Falschparker melden", "Lärmbelästigung", "Graffiti melden",
+    "Versammlungsanmeldung", "Hundesteuern",
+    "Online-Dienste Verwaltung", "Digitaler Ausweis", "E-Government Portal",
+    "App Stadtservices", "Digitale Ummeldung",
+    "Rathaus Heizung defekt", "Schulgebäude Reparatur", "Stadthaus Aufzug defekt",
+    "Reinigung öffentliche Gebäude", "Mietvertrag Stadtimmobilie",
+    "Sozialhilfe beantragen", "Wohngeld Antrag", "Grundsicherung",
+    "Pflegeberatung", "Obdachlosenunterkunft",
 ]
 DEFAULT_LABELS = [
     "Bürgeramt","Bürgeramt","Bürgeramt","Bürgeramt","Bürgeramt","Bürgeramt",
@@ -117,6 +133,10 @@ DEFAULT_LABELS = [
     "Bauamt","Bauamt","Bauamt","Bauamt","Bauamt",
     "Bildung und Betreuung","Bildung und Betreuung","Bildung und Betreuung",
     "Bildung und Betreuung","Bildung und Betreuung",
+    "Ordnungsamt","Ordnungsamt","Ordnungsamt","Ordnungsamt","Ordnungsamt",
+    "Digitalisierung","Digitalisierung","Digitalisierung","Digitalisierung","Digitalisierung",
+    "Gebäudewirtschaft","Gebäudewirtschaft","Gebäudewirtschaft","Gebäudewirtschaft","Gebäudewirtschaft",
+    "Sozialamt","Sozialamt","Sozialamt","Sozialamt","Sozialamt",
 ]
 
 # Auslastungs-Trainingsdaten: Features [tag(0-4), monat(1-12)] -> Besucher
@@ -180,7 +200,7 @@ def predict_hour(base, hour):
 
 st.markdown("""
 <div class="gov-header">
-    <h1>SmartGov AI — Intelligente Verwaltungssteuerung</h1>
+    <h1>Smarte Verwaltung — Intelligente Verwaltungssteuerung</h1>
     <p>Automatische Zuordnung von Bürgeranfragen &middot; E-Mail-Weiterleitung &middot; Auslastungsprognose</p>
 </div>
 """, unsafe_allow_html=True)
@@ -254,7 +274,7 @@ with tab1:
                 f"hiermit leiten wir Ihnen eine eingegangene Bürgeranfrage zur weiteren Bearbeitung weiter.\n\n"
                 f"Datum: {today}\nAbsender: {sender}\n\nAnfrage:\n{anf}\n\n"
                 f"Bitte nehmen Sie Kontakt mit dem Bürger auf und bearbeiten Sie das Anliegen "
-                f"gemäß der internen Richtlinien.\n\nMit freundlichen Grüßen\nSmartGov Eingangssteuerung"
+                f"gemäß der internen Richtlinien.\n\nMit freundlichen Grüßen\nSmarte Verwaltung Eingangssteuerung"
             )
             st.markdown(f"""
             <div class="email-box">
